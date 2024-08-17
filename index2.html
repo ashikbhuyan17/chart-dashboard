@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .circle-wrap {
+            display: inline-block;
+            width: 120px;
+            height: 120px;
+            background: conic-gradient(
+                #08315e 0deg,       /* Filled portion */
+                #08315e 36deg,      /* Transition between filled and 30% section */
+                #add8e6 108deg,     /* 30% section */
+                #e6f0fa 108deg      /* Empty portion */
+            );
+            border-radius: 50%;
+            position: relative;
+        }
+
+        .circle-wrap .inner-circle {
+            width: 90%;
+            height: 90%;
+            background-color: white;
+            border-radius: 50%;
+            position: absolute;
+            top: 5%;
+            left: 5%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: Arial, sans-serif;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #4f86c6;
+        }
+    </style>
+    <title>Circle Progress Indicator</title>
+</head>
+<body>
+
+<div class="circle-wrap">
+    <div class="inner-circle">Low</div>
+</div>
+
+</body>
+</html>

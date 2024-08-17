@@ -1,67 +1,48 @@
-// import React from "react";
-
-// export default function Dashboard() {
-//   return (
-//     <div>
-//       Dashboard Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolore
-//       illo tempora esse voluptatum omnis facere at repudiandae molestias, quam,
-//       non excepturi tenetur debitis. Provident distinctio dolorum, amet modi
-//       necessitatibus, nisi doloremque eius ducimus earum officiis enim saepe.
-//       Repudiandae quam dolore dolorem accusamus aut voluptatibus consequatur
-//       nulla doloribus, consectetur repellat autem libero nostrum nihil
-//       molestias, quaerat assumenda nisi, minus necessitatibus. Illo perferendis
-//       laudantium, molestiae quidem dolorum animi voluptatum sequi at ea aliquam.
-//       Facere atque culpa aliquid laudantium praesentium veniam ea quam! Possimus
-//       porro quo dignissimos illo inventore sequi minus nostrum. Eveniet deleniti
-//       commodi ut repellat fuga autem id nam deserunt iusto?
-//     </div>
-//   );
-// }
-import React, { useEffect, useRef } from "react";
-import { Chart } from "chart.js/auto";
+import React, { useEffect, useRef } from 'react';
+import { Chart } from 'chart.js/auto';
 
 const Dashboard = () => {
   const canvasRef = useRef(null);
 
   useEffect(() => {
     const canvas = canvasRef.current;
-    const ctx = canvas.getContext("2d");
+    const ctx = canvas.getContext('2d');
 
     // Gradient color - this week
     const gradientThisWeek = ctx.createLinearGradient(0, 0, 0, 150);
-    gradientThisWeek.addColorStop(0, "#5555FF");
-    gradientThisWeek.addColorStop(1, "#9787FF");
+    gradientThisWeek.addColorStop(0, '#5555FF');
+    gradientThisWeek.addColorStop(1, '#9787FF');
 
     // Gradient color - previous week
     const gradientPrevWeek = ctx.createLinearGradient(0, 0, 0, 150);
-    gradientPrevWeek.addColorStop(0, "#FF55B8");
-    gradientPrevWeek.addColorStop(1, "#FF8787");
+    gradientPrevWeek.addColorStop(0, '#FF55B8');
+    gradientPrevWeek.addColorStop(1, '#FF8787');
 
     const multiply = {
-      id: "multiply",
+      id: 'multiply',
       beforeDatasetsDraw(chart) {
-        chart.ctx.globalCompositeOperation = "multiply";
+        chart.ctx.globalCompositeOperation = 'multiply';
       },
       afterDatasetsDraw(chart) {
-        chart.ctx.globalCompositeOperation = "source-over";
+        chart.ctx.globalCompositeOperation = 'source-over';
       },
     };
 
     const config = {
-      type: "line",
+      type: 'line',
       data: {
-        labels: ["SUN", "MON", "TUE", "WED"],
+        labels: ['SUN', 'MON', 'TUE', 'WED'],
         datasets: [
           {
-            label: "Temperature",
+            label: 'Temperature',
             data: [20, 22, 14, 22],
             fill: false,
-            borderColor: "rgba(255, 255, 255, 0.2)",
+            borderColor: 'rgba(255, 255, 255, 0.2)',
             borderWidth: 2,
-            pointBackgroundColor: "transparent",
-            pointBorderColor: "#FFFFFF",
+            pointBackgroundColor: 'transparent',
+            pointBorderColor: '#FFFFFF',
             pointBorderWidth: 3,
-            pointHoverBorderColor: "rgba(255, 255, 255, 0.2)",
+            pointHoverBorderColor: 'rgba(255, 255, 255, 0.2)',
             pointHoverBorderWidth: 10,
             lineTension: 0,
           },
@@ -81,12 +62,12 @@ const Dashboard = () => {
             display: false,
           },
           tooltip: {
-            backgroundColor: "transparent",
+            backgroundColor: 'transparent',
             displayColors: false,
             bodyFontSize: 14,
             callbacks: {
               label(tooltipItems) {
-                return tooltipItems.formattedValue + "°C";
+                return tooltipItems.formattedValue + '°C';
               },
             },
           },
@@ -112,16 +93,32 @@ const Dashboard = () => {
   }, []);
 
   return (
-    <div className="w-1/2 mt-10">
-      <div className="bg-[#243A52] p-4 h-[500px] flex justify-between rounded-md">
-        <div className="text-white basis-2/5">
-          <div className="flex justify-between gap-x-5">
-            <p>IndianA,USA</p>
-            <p> Today 00:32 PM</p>
-          </div>
-          <div>
-            <p className="text-[80px]">20°C</p>
-            <p>Mostly Clear</p>
+    <div className="w-1/2 mt-10 space-y-5">
+      <div className="bg-[#243A52] p-4  flex justify-between rounded-md">
+        <div className="text-white basis-2/5 flex justify-center items-baseline">
+          <div className="space-y-14">
+            <div className="flex justify-between gap-x-5">
+              <p>IndianA,USA</p>
+              <p> Today 00:32 PM</p>
+            </div>
+            <div>
+              <p className="text-[80px]">20°C</p>
+              <p>Mostly Clear</p>
+            </div>
+            <div className="flex justify-between items-center gap-x-4">
+              <p>
+                <span>icon </span>
+                <span>720hpa</span>
+              </p>
+              <p>
+                <span>icon </span>
+                <span>32%</span>
+              </p>
+              <p>
+                <span>icon </span>
+                <span>12km/h</span>
+              </p>
+            </div>
           </div>
         </div>
         <div className="card basis-2/5">
@@ -171,6 +168,61 @@ const Dashboard = () => {
           <span className="day-name">SUN</span>
           <span className="value value--this">18°C</span>
         </div> */}
+          </div>
+        </div>
+      </div>
+      <div className="flex justify-between max-md:flex-wrap max-md:space-y-4 md:space-x-4">
+        <div className="bg-[#ECF3FB] py-4 px-7 rounded-md flex justify-evenly items-center w-full">
+          <div className="space-y-3">
+            <p className="font-semibold text-lg">Wind </p>
+            <p className="text-gray-400">Today wind speed</p>
+            <p className="font-semibold text-lg">12km/h</p>
+          </div>
+          <div>
+            <img src="/wind-removebg-preview.png" alt="" width={200} />
+          </div>
+        </div>
+        <div className="bg-[#ECF3FB] py-4 px-7 rounded-md flex justify-evenly items-center w-full">
+          <div className="space-y-3">
+            <p className="font-semibold text-lg">Rain Chanse </p>
+            <p className="text-gray-400">Today rain chanse</p>
+            <p className="font-semibold text-lg">24%</p>
+          </div>
+          <div className="w-[200px] ml-6">
+            <div className="circle-wrap">
+              <div className="inner-circle">Low</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="flex justify-between max-md:flex-wrap max-md:space-y-4 md:space-x-4">
+        <div className="bg-[#ECF3FB] py-4 px-7 rounded-md flex justify-evenly items-center w-full">
+          <div className="space-y-3">
+            <p className="font-semibold text-lg">Pressure </p>
+            <p className="text-gray-400">Today Pressure</p>
+            <p className="font-semibold text-lg">720hpa</p>
+          </div>
+          <div>
+            <img
+              src="/pressure.png"
+              alt=""
+              width={200}
+              style={{
+                height: '200px',
+              }}
+            />
+          </div>
+        </div>
+        <div className="bg-[#ECF3FB] py-4 px-7 rounded-md flex justify-evenly items-center w-full">
+          <div className="space-y-3">
+            <p className="font-semibold text-lg">UV Index </p>
+            <p className="text-gray-400">Today UV Index</p>
+            <p className="font-semibold text-lg">2</p>
+          </div>
+          <div className=" ml-6">
+            <div className="circle-wrap">
+              <div className="inner-circle">Low</div>
+            </div>
           </div>
         </div>
       </div>
