@@ -4,7 +4,7 @@ import { Outlet, useLocation, useParams } from "react-router-dom";
 
 export default function MainLayout() {
   let location = useLocation();
-  console.log("🚀 ~ MainLayout ~ location:", location.pathname);
+
   const sidebarData = [
     {
       title: "Dashboard",
@@ -33,9 +33,9 @@ export default function MainLayout() {
     },
   ];
   return (
-    <div className="flex gap-x-10">
+    <div className="md:flex md:gap-x-10">
       {" "}
-      <div className="border-r w-[300px] shadow-sm h-[100vh]">
+      <div className=" max-md:hidden border-r w-[300px] shadow-sm h-[100vh]">
         {sidebarData.map((data, index) => (
           <div
             key={index}
@@ -47,7 +47,7 @@ export default function MainLayout() {
           </div>
         ))}
       </div>
-      <div className="w-full">
+      <div className="w-full max-md:p-2">
         <div>
           <Outlet />
         </div>
