@@ -94,7 +94,7 @@ const Dashboard = () => {
 
   return (
     <div className="w-full md:w-1/2 md:mt-10 space-y-5">
-      <div className="bg-[#243A52] p-4  flex justify-between rounded-md">
+      <div className="bg-[#243A52] p-4  flex max-md:flex-col max-md:space-y-4 justify-between rounded-md">
         <div className="text-white basis-2/5 flex justify-center items-baseline">
           <div className="space-y-14">
             <div className="flex justify-between gap-x-5">
@@ -121,7 +121,7 @@ const Dashboard = () => {
             </div>
           </div>
         </div>
-        <div className="card basis-2/5">
+        <div className="card basis-full md:basis-2/5 ">
           {/* Custom information */}
           <div className="about">
             <p className="lead">Temperature in °C</p>
