@@ -96,13 +96,13 @@ const Dashboard = () => {
     <div className="w-full md:w-1/2 md:mt-10 space-y-5">
       <div className="bg-[#243A52] p-4  flex max-md:flex-col max-md:space-y-4 justify-between rounded-md">
         <div className="text-white basis-2/5 flex justify-center items-baseline">
-          <div className="space-y-14">
+          <div className="space-y-7 md:space-y-14">
             <div className="flex justify-between gap-x-5">
               <p>IndianA,USA</p>
               <p> Today 00:32 PM</p>
             </div>
             <div>
-              <p className="text-[80px]">20°C</p>
+              <p className="text-[40px] md:text-[80px]">20°C</p>
               <p>Mostly Clear</p>
             </div>
             <div className="flex justify-between items-center gap-x-4">
