@@ -1,48 +1,48 @@
-import React, { useEffect, useRef } from 'react';
-import { Chart } from 'chart.js/auto';
+import React, { useEffect, useRef } from "react";
+import { Chart } from "chart.js/auto";
 
 const Dashboard = () => {
   const canvasRef = useRef(null);
 
   useEffect(() => {
     const canvas = canvasRef.current;
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext("2d");
 
     // Gradient color - this week
     const gradientThisWeek = ctx.createLinearGradient(0, 0, 0, 150);
-    gradientThisWeek.addColorStop(0, '#5555FF');
-    gradientThisWeek.addColorStop(1, '#9787FF');
+    gradientThisWeek.addColorStop(0, "#5555FF");
+    gradientThisWeek.addColorStop(1, "#9787FF");
 
     // Gradient color - previous week
     const gradientPrevWeek = ctx.createLinearGradient(0, 0, 0, 150);
-    gradientPrevWeek.addColorStop(0, '#FF55B8');
-    gradientPrevWeek.addColorStop(1, '#FF8787');
+    gradientPrevWeek.addColorStop(0, "#FF55B8");
+    gradientPrevWeek.addColorStop(1, "#FF8787");
 
     const multiply = {
-      id: 'multiply',
+      id: "multiply",
       beforeDatasetsDraw(chart) {
-        chart.ctx.globalCompositeOperation = 'multiply';
+        chart.ctx.globalCompositeOperation = "multiply";
       },
       afterDatasetsDraw(chart) {
-        chart.ctx.globalCompositeOperation = 'source-over';
+        chart.ctx.globalCompositeOperation = "source-over";
       },
     };
 
     const config = {
-      type: 'line',
+      type: "line",
       data: {
-        labels: ['SUN', 'MON', 'TUE', 'WED'],
+        labels: ["SUN", "MON", "TUE", "WED"],
         datasets: [
           {
-            label: 'Temperature',
+            label: "Temperature",
             data: [20, 22, 14, 22],
             fill: false,
-            borderColor: 'rgba(255, 255, 255, 0.2)',
+            borderColor: "rgba(255, 255, 255, 0.2)",
             borderWidth: 2,
-            pointBackgroundColor: 'transparent',
-            pointBorderColor: '#FFFFFF',
+            pointBackgroundColor: "transparent",
+            pointBorderColor: "#FFFFFF",
             pointBorderWidth: 3,
-            pointHoverBorderColor: 'rgba(255, 255, 255, 0.2)',
+            pointHoverBorderColor: "rgba(255, 255, 255, 0.2)",
             pointHoverBorderWidth: 10,
             lineTension: 0,
           },
@@ -62,12 +62,12 @@ const Dashboard = () => {
             display: false,
           },
           tooltip: {
-            backgroundColor: 'transparent',
+            backgroundColor: "transparent",
             displayColors: false,
             bodyFontSize: 14,
             callbacks: {
               label(tooltipItems) {
-                return tooltipItems.formattedValue + '°C';
+                return tooltipItems.formattedValue + "°C";
               },
             },
           },
@@ -209,7 +209,7 @@ const Dashboard = () => {
                 alt=""
                 width={200}
                 style={{
-                  height: '200px',
+                  height: "200px",
                 }}
               />
             </div>
@@ -270,6 +270,15 @@ const Dashboard = () => {
             scrolling="no"
           ></iframe>
           <br />
+        </div>
+        <div className="border p-2">
+          <iframe
+            src="https://map.worldweatheronline.com/?ref=websitehunt.co"
+            width="100%"
+            height="600"
+            frameborder="0"
+            allowfullscreen
+          ></iframe>
         </div>
       </div>
     </div>
