@@ -51,7 +51,7 @@ export default function Next5hoursData({ next5HoursData }) {
     <div>
       <div className="space-y-4">
         <p className="text-xl font-bold">Today</p>
-        <div className="flex gap-x-2">
+        <div className="flex gap-x-2 flex-wrap space-y-2">
           {/* Dynamically render weather data for each hour */}
           {next5HoursData &&
             next5HoursData.map((hour, index) => (
