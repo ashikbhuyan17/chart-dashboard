@@ -181,7 +181,7 @@ export default function DashboardMapData({ lat, lon }) {
   };
   return (
     <div>
-      <div className="flex max-xl:flex-col md:mt-10 justify-between xl:space-x-10 max-xl:space-y-5">
+      <div className="flex max-xl:flex-col md:my-5 justify-between xl:space-x-10 max-xl:space-y-5">
         <div className="w-full space-y-5">
           <div className="bg-[#243A52] p-4  flex justify-center max-md:space-y-4  rounded-md">
             <div className="text-white ">
