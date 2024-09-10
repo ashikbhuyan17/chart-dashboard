@@ -368,7 +368,7 @@ export default function DashboardMapData({ lat, lon }) {
             </a>
           </div>
           <div className="my-5 relative ">
-            <img src="/Google-Maps-2.jpg" alt="" width="100%" />
+            <img src="/Google-Maps-1.jpeg" alt="" width="100%" />
             <a
               href={`https://weather-api-backend-inky.vercel.app/api/v1/ev-stations/?lat=${lat}&lon=${lon}`}
               //   https://weather-api-backend-inky.vercel.app/api/v1/traffic-incidents-list/?lat=23.740416&lon=90.4134656
