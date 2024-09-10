@@ -1,9 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Chart } from 'chart.js/auto';
 import { useQuery } from '@tanstack/react-query';
-import { fetchNext5HoursData, fetchWeatherData } from '../queries';
+import {
+  fetchExtremeWeather,
+  fetchNext5HoursData,
+  fetchWeatherData,
+} from '../queries';
 import WeatherChart from './Chart';
 import Next5hoursData from './Next5hoursData';
+import ExtremeWeather from './ExtremeWeather';
 export default function DashboardMapData({ lat, lon }) {
   const {
     isPending,
@@ -16,15 +21,23 @@ export default function DashboardMapData({ lat, lon }) {
     queryFn: () => fetchWeatherData(lat, lon),
     enabled: !!lat && !!lon,
   });
-  console.log('🚀 ~ DashboardMapData ~ weatherData:', weatherData);
 
   const { data: next5HoursData } = useQuery({
     queryKey: ['fetchNext5Hours'],
     queryFn: () => fetchNext5HoursData(lat, lon),
     enabled: !!lat && !!lon,
   });
-  console.log('____________', next5HoursData?.next_5_hours);
+  const { data: extremeWeatherData } = useQuery({
+    queryKey: ['extremeWeather'],
+    queryFn: () => fetchExtremeWeather(lat, lon),
+    // fetchExtremeWeather((lat = 30.33549556109), (lon = -81.648038032066)),
+    enabled: !!lat && !!lon,
+  });
 
+  console.log(
+    '🚀 ~ DashboardMapData ~ extremeWeatherData:',
+    extremeWeatherData?.alerts
+  );
   //   const [weatherData, setWeatherData] = useState({
   //     location: 'Dhaka',
   //     current_time: '2024-09-09 13:10',
@@ -254,59 +267,75 @@ export default function DashboardMapData({ lat, lon }) {
               />
             )}
           </div>
-          <div className="flex justify-between max-xl:flex-wrap max-xl:space-y-4 xl:space-x-4">
-            <div className="bg-[#ECF3FB] py-4 px-7 rounded-md flex justify-evenly items-center w-full">
-              <div className="space-y-3">
-                <p className="font-semibold text-lg">Wind </p>
-                <p className="text-gray-400">Today wind speed</p>
-                <p className="font-semibold text-lg">
-                  {weatherData?.wind_speed}
-                </p>
-              </div>
-              <div>
-                <img src="/wind-removebg-preview.png" alt="" width={200} />
-              </div>
-            </div>
-            <div className="bg-[#ECF3FB] py-4 px-7 rounded-md flex justify-evenly items-center w-full">
-              <div className="space-y-3">
-                <p className="font-semibold text-lg">Rain Chanse </p>
-                <p className="text-gray-400">Today rain chanse</p>
-                <p className="font-semibold text-lg">24%</p>
-              </div>
-              <div className="w-[200px] ml-6">
-                <div className="circle-wrap">
-                  <div className="inner-circle">Low</div>
+          <div className="flex  flex-wrap max-sm:justify-between gap-3 max-sm:p-1">
+            <div className="bg-[#ECF3FB] px-3 py-3 rounded-md w-[200px] max-sm:w-[160px]">
+              <div className="space-y-3 text-center">
+                <div className="h-[100px] flex justify-center items-center ">
+                  <img
+                    src="/wind-1.png"
+                    alt="Wind"
+                    className="w-full h-full object-contain"
+                  />
+                </div>
+                <div>
+                  <p className="font-semibold text-lg">Wind</p>
+                  <p className="text-gray-400">Today wind speed</p>
+                  <p className="font-semibold text-lg">
+                    {weatherData?.wind_speed}
+                  </p>
                 </div>
               </div>
             </div>
-          </div>
-          <div className="flex justify-between max-xl:flex-wrap max-xl:space-y-4 xl:space-x-4">
-            <div className="bg-[#ECF3FB] py-4 px-7 rounded-md flex justify-evenly items-center w-full">
-              <div className="space-y-3">
-                <p className="font-semibold text-lg">Pressure </p>
-                <p className="text-gray-400">Today Pressure</p>
-                <p className="font-semibold text-lg">{weatherData?.pressure}</p>
-              </div>
-              <div>
-                <img
-                  src="/pressure.png"
-                  alt=""
-                  width={200}
-                  style={{
-                    height: '200px',
-                  }}
-                />
+
+            <div className="bg-[#ECF3FB] px-3 py-3 rounded-md w-[200px] max-sm:w-[160px]">
+              <div className="space-y-3 text-center">
+                <div className="h-[100px] flex justify-center items-center ">
+                  <img
+                    src="/rain.png"
+                    alt="Pressure"
+                    className="w-full h-full object-contain"
+                  />
+                </div>
+                <div>
+                  <p className="font-semibold text-lg">Rain Chance</p>
+                  <p className="text-gray-400">Today rain chance</p>
+                  <p className="font-semibold text-lg">24%</p>
+                </div>
               </div>
             </div>
-            <div className="bg-[#ECF3FB] py-4 px-7 rounded-md flex justify-evenly items-center w-full">
-              <div className="space-y-3">
-                <p className="font-semibold text-lg">UV Index </p>
-                <p className="text-gray-400">Today UV Index</p>
-                <p className="font-semibold text-lg">2</p>
+
+            <div className="bg-[#ECF3FB] px-3 py-3 rounded-md w-[200px] max-sm:w-[160px] ">
+              <div className="space-y-3 text-center">
+                <div className="h-[100px] flex justify-center items-center ">
+                  <img
+                    src="/pressure-1.png"
+                    alt="Pressure"
+                    className="w-full h-full object-contain"
+                  />
+                </div>
+                <div>
+                  <p className="font-semibold text-lg">Pressure</p>
+                  <p className="text-gray-400">Today Pressure</p>
+                  <p className="font-semibold text-lg">
+                    {weatherData?.pressure}
+                  </p>
+                </div>
               </div>
-              <div className=" ml-6">
-                <div className="circle-wrap">
-                  <div className="inner-circle">Low</div>
+            </div>
+
+            <div className="bg-[#ECF3FB] px-3 py-3 rounded-md w-[200px] max-sm:w-[160px] ">
+              <div className="space-y-3 text-center">
+                <div className="h-[100px] flex justify-center items-center ">
+                  <img
+                    src="/uv.png"
+                    alt="Pressure"
+                    className="w-full h-full object-contain"
+                  />
+                </div>
+                <div>
+                  <p className="font-semibold text-lg">UV Index </p>
+                  <p className="text-gray-400">Today UV Index</p>
+                  <p className="font-semibold text-lg">2</p>
                 </div>
               </div>
             </div>
@@ -327,21 +356,24 @@ export default function DashboardMapData({ lat, lon }) {
               href={`https://weather-api-backend-inky.vercel.app/api/v1/traffic-incidents-list/?lat=${lat}&lon=${lon}`}
               //   https://weather-api-backend-inky.vercel.app/api/v1/traffic-incidents-list/?lat=23.740416&lon=90.4134656
               target="_blank"
-              className="bg-[#243A52] text-white w-[140px] rounded-md p-2 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+              className="bg-[#243A52] text-white  text-center w-[200px] rounded-md p-2 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
             >
-              Road Closer Info
+              Traffic Incidents List
+            </a>
+          </div>
+          <div className="my-5 relative ">
+            <img src="/Google-Maps-2.jpg" alt="" width="100%" />
+            <a
+              href={`https://weather-api-backend-inky.vercel.app/api/v1/ev-stations/?lat=${lat}&lon=${lon}`}
+              //   https://weather-api-backend-inky.vercel.app/api/v1/traffic-incidents-list/?lat=23.740416&lon=90.4134656
+              target="_blank"
+              className="bg-[#243A52] text-white  text-center w-[200px] rounded-md p-2 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+            >
+              ev-station
             </a>
           </div>
 
-          <div className="border p-2">
-            <iframe
-              src="https://map.worldweatheronline.com/?ref=websitehunt.co"
-              width="100%"
-              height="600"
-              frameBorder="0"
-              allowfullscreen
-            ></iframe>
-          </div>
+          <ExtremeWeather extremeWeatherData={extremeWeatherData} />
         </div>
       </div>
     </div>
