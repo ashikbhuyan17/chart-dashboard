@@ -1,21 +1,30 @@
 // project imports
-import { Suspense, lazy } from "react";
-import MainLayout from "../Layout/MainLayout";
+import { Suspense, lazy } from 'react';
+import MainLayout from '../Layout/MainLayout';
 
 // Lazy-loaded components
-const Dashboard = lazy(() => import("../pages/Dashboard"));
+const Dashboard = lazy(() => import('../pages/Dashboard'));
+const EvStations = lazy(() => import('../pages/EvStations'));
 
 // ==============================|| MAIN ROUTING ||============================== //
 
 const MainRoutes = {
-  path: "/",
+  path: '/',
   element: <MainLayout />,
   children: [
     {
-      path: "",
+      path: '',
       element: (
         <Suspense fallback={<>loading............</>}>
           <Dashboard />
+        </Suspense>
+      ),
+    },
+    {
+      path: '/uv-station',
+      element: (
+        <Suspense fallback={<>loading............</>}>
+          <EvStations />
         </Suspense>
       ),
     },

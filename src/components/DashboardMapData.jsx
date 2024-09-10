@@ -192,6 +192,14 @@ export default function DashboardMapData({ lat, lon }) {
     minute: 'numeric',
     hour12: true,
   };
+  const date = new Date(weatherData?.current_time);
+
+  // Format the date and time as needed
+  const formattedDate = date.toLocaleDateString(); // '2024-09-10'
+  const formattedTime = date.toLocaleTimeString([], {
+    hour: '2-digit',
+    minute: '2-digit',
+  }); // '10:33 AM'
   return (
     <div>
       <div className="flex max-xl:flex-col md:my-5 justify-between xl:space-x-10 max-xl:space-y-5">
@@ -200,11 +208,9 @@ export default function DashboardMapData({ lat, lon }) {
             <div className="text-white ">
               <div className="space-y-7 md:space-y-14">
                 <div className="flex justify-between gap-x-5">
-                  <p>{weatherData?.location}</p>
-                  <p>
-                    {' '}
-                    {weatherData?.current_time.toLocaleString('en-US', options)}
-                  </p>
+                  <p>Location : {weatherData?.location}</p>
+                  <p> Date : {formattedDate} </p>
+                  <p> Time : {formattedTime}</p>
                 </div>
                 <div>
                   <p className="text-[40px] md:text-[80px]">
@@ -214,7 +220,7 @@ export default function DashboardMapData({ lat, lon }) {
                 </div>
                 <div className="flex justify-between items-center gap-x-4">
                   <p>
-                    <span>pressure : </span>
+                    <span>Pressure : </span>
                     <span>{weatherData?.pressure}</span>
                   </p>
                   {/* <p>
@@ -222,7 +228,7 @@ export default function DashboardMapData({ lat, lon }) {
                     <span>32%</span>
                   </p> */}
                   <p>
-                    <span>wind_speed: </span>
+                    <span>Wind Speed: </span>
                     <span>{weatherData?.wind_speed}</span>
                   </p>
                 </div>
@@ -369,7 +375,7 @@ export default function DashboardMapData({ lat, lon }) {
               target="_blank"
               className="bg-[#243A52] text-white  text-center w-[200px] rounded-md p-2 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
             >
-              ev-station
+              EV Station
             </a>
           </div>
 

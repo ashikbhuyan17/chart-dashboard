@@ -41,3 +41,13 @@ export const fetchExtremeWeather = async (lat, lon) => {
     throw error;
   }
 };
+
+export const fetchEvStations = async (lat, lon) => {
+  try {
+    const response = await instance.get(`/ev-stations/?lat=${lat}&lon=${lon}`); // Assuming the weather endpoint is at '/weather'
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching weather data:', error);
+    throw error;
+  }
+};
